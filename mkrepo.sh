@@ -2,6 +2,7 @@
 
 function mkrepo() {
   local repo_name=$1
+  local repo_account=$2
 
   if [[ -z "$repo_name" ]]; then
     echo "❌ Usage: mkrepo <owner>/<repo>"
@@ -16,10 +17,10 @@ function mkrepo() {
   git commit -m "First commit"
 
   echo "🌐 Création du dépôt GitHub '$repo_name' (privé)..."
-  gh repo create "$repo_name" --private --confirm
+  gh repo create "$repo_account/$repo_name" --private
 
   echo "🔗 Ajout du remote origin..."
-  git remote add origin "https://github.com/$repo_name.git"
+  git remote add origin "https://github.com/$repo_account/$repo_name.git"
 
   echo "🚀 Push vers main..."
   git push -u origin main
